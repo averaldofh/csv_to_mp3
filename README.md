@@ -35,9 +35,7 @@ $ git clone https://github.com/HarryMaher/csv_to_mp3.git
 ```
 1. Install ffmpeg (https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
 2. Install youtube_dl, pandas, and bs4 with "pip3 install packagename"
-3. Create a songs.csv in the same directory as this auto_yt_dl with a "song" and "artist" field
-   (see current songs.csv for example of what it should look like)
+3. Download the csv file of your playlist from exportify website, rename to songs.csv 
+and put in the same directory of this script.
 4. Run this "python csv_to_mp3.py" (may take about a minute per song)
 5. Drag the music to your offline device, and enjoy!
-
-Note: It really only works for decently popular songs on youtube
