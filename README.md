@@ -7,6 +7,9 @@ May lead to problems, for sure, but it's working fine.
 To get a csv file from a spotify playlist use the website
 https://watsonbox.github.io/exportify/
 put it in the script folder and rename it to songs.csv. no changes required
+ - OR -
+you can simply create a csv file with two columns named 'Track Name' and 'Artist Name'.
+In case there is duplicates for the track name, only 1 will be downloaded.
 
 ### *Description:* ###
 
