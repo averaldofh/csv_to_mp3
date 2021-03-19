@@ -1,5 +1,4 @@
-song,artist
-wouldn't it be nice,the beach boys
-astral plane,valerie june
-vem meu amor,odolum
-samson,regina spektor
+Track URI,Track Name,Artist URI,Artist Name,Album URI,Album Name,Album Release Date,Album Image URL,Disc Number,Track Number,Track Duration (ms),Track Preview URL,Explicit,Popularity,Added By,Added At
+spotify:track:2obblQ6tcePeOEVJV6nEGD,Cat's in the Cradle,spotify:artist:42q4Ivs7tAiCZ5C7eG5q4c,Harry Chapin,spotify:album:3nta4nhqWoWjc6LmHIB0kT,Verities & Balderdash,1974,https://i.scdn.co/image/ab67616d0000b2738756752bf0c0720a41c95bbc,1,1,222951,https://p.scdn.co/mp3-preview/82b3133b803277d6975882f7b98825aa82f59eb1?cid=9950ac751e34487dbbe027c4fd7f8e99,false,66,,2020-09-08T00:35:54Z
+spotify:track:2utvK2CuAEXbUnPpV9ataH,One Way Or Another,spotify:artist:4tpUmLEVLCGFr93o8hFFIB,Blondie,spotify:album:5HRB9TeaIHRBxfIm4XZTj6,Atomic/Atomix,1999-01-01,https://i.scdn.co/image/ab67616d0000b273ebc918cfb51e9ced7349f436,1,16,208360,https://p.scdn.co/mp3-preview/d5041479165a11e7686e5591578cdfb0962670e4?cid=9950ac751e34487dbbe027c4fd7f8e99,false,49,,2020-05-15T02:00:14Z
+
