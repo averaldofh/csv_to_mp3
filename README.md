@@ -30,8 +30,8 @@ individual songs or tediously going through a list of songs w/ youtube2mp3.
 Not recommended for building a large library--made for getting ~5-15 new songs
 to drag to an mp3 player to before going on a run or bike ride
 
-### *Instructions:* ###
-
+## *Instructions:* ##
+### One way ###
 0. Clone this repo:
 ```
 $ git clone https://github.com/HarryMaher/csv_to_mp3.git
@@ -42,3 +42,9 @@ $ git clone https://github.com/HarryMaher/csv_to_mp3.git
 and put in the same directory of this script.
 4. Run this "python csv_to_mp3.py" (may take about a minute per song)
 5. Drag the music to your offline device, and enjoy!
+
+### Another way ###
+0. Download the latest release: https://github.com/averaldofh/csv_to_mp3/releases
+1. Install ffmpeg (https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
+2. Put the csv file in the same folder as the executable
+3. Run the .exe file and it's done.
