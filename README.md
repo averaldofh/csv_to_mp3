@@ -1,5 +1,14 @@
 # csv to mp3 #
 
+# THIS IS A PERSONAL MODIFICATION #
+I've found out this script from Harry Maher, but it was 4 years old, and wasn't working for me.
+So i made a little modification that worked, but it's not an inteligent way to do it. 
+May lead to problems, for sure, but it's working fine. 
+To get a csv file from a spotify playlist use the website
+https://watsonbox.github.io/exportify/
+and modify the csv to match the example csv, with only 2 columns, 'song' and 'artist'
+should work. 
+
 ### *Description:* ###
 
 This script takes a .csv file that contains a list of song titles and artist 
