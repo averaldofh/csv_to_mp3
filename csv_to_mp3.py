@@ -58,9 +58,9 @@ songs_csv = "songs.csv"
 def get_href(url):
     response = requests.get(url)
     content = response.content
-    soup = BeautifulSoup(content, "lxml")
-    # Get all the links to videos, because the first might be an ad
-    tag = [a['href'] for a in soup.find_all("a", {'class', 'yt-uix-tile-link'}, text=True)]
+    ii = content.find(b'/watch?')
+    tag = str(content[ii:ii+20])
+    tag = tag[2:-1]
     return tag
 
 
@@ -78,7 +78,6 @@ def yt_dler(vid_link):
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     ydl.download([vid_link])
 
-
 def main():
 	songs = pd.read_csv(songs_csv)
 	search_url = 'https://www.youtube.com/results?search_query='
@@ -88,12 +87,7 @@ def main():
 		this_song = songs["song"][i]+" "+ songs["artist"][i]
 		this_search = "+".join(this_song.strip().split())
 		div = get_href(search_url+this_search)
-		# sometimes the first is an ad and ads start with 'https...' whereas genuine video links are just the "/asDFeG4BLaH" 
-		if "https" not in div[0]:
-			link_ext = div[0]
-		else:
-			link_ext = div[1]
-		complete_link = yt_link+link_ext
+		complete_link = yt_link+div
 		print(i, this_song, complete_link)
 		yt_dler(complete_link)
 		i+=1
