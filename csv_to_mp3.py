@@ -52,6 +52,7 @@ import youtube_dl
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import os
 
 songs_csv = "songs.csv"
 
@@ -65,8 +66,9 @@ def get_href(url):
 
 
 def yt_dler(vid_link):
-	# d/l settings
+    # d/l settings
     ydl_opts = {
+        'outtmpl': 'Downloaded_mp3/%(title)s.%(ext)s',
         'format': 'bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -78,19 +80,39 @@ def yt_dler(vid_link):
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     ydl.download([vid_link])
 
+def names(folder):
+    for filename in (os.listdir(folder)):
+        dst = str(filename).replace('_',' ')
+        print('Renaming ', str(filename), ' To ', dst)
+        src = folder + '/' + str(filename)
+        dst = folder + '/' + dst
+        os.rename(src, dst)
+
 def main():
-	songs = pd.read_csv(songs_csv)
-	search_url = 'https://www.youtube.com/results?search_query='
-	yt_link = 'http://www.youtube.com'
-	i=0
-	while i<len(songs["song"]):
-		this_song = songs["song"][i]+" "+ songs["artist"][i]
-		this_search = "+".join(this_song.strip().split())
-		div = get_href(search_url+this_search)
-		complete_link = yt_link+div
-		print(i, this_song, complete_link)
-		yt_dler(complete_link)
-		i+=1
+    print('''
+    ########################################################################
+    ##    YOUTUBE DOWNLOAD FROM CSV LIST V0.1 - Forked from HarryMaher    ##
+    ##      USE EXPORTIFY WEBSITE TO GENERATE THE LIST, RENAME TO         ##
+    ##      SONGS.CSV IN THE SAME FOLDER AS THIS SCRIPT, AND RUN IT.      ##
+    ##      IT WILL DOWNLOAD THE FIRST SEARCH RESULT FOR THE SONG         ##
+    ##                                                          MARCH/21  ##
+    ########################################################################
+    ''')
+    songs = pd.read_csv(songs_csv)
+    songs.drop_duplicates(subset='Track Name', keep='first', inplace=True, ignore_index=True)
+    search_url = 'https://www.youtube.com/results?search_query='
+    yt_link = 'http://www.youtube.com'
+    i=0
+    while i<len(songs["Track Name"]):
+        this_song = songs["Track Name"][i]+" "+ songs["Artist Name"][i]
+        this_search = "+".join(this_song.strip().split())
+        div = get_href(search_url+this_search)
+        complete_link = yt_link+div
+        print("Downloading: ", i, this_song, " From: ",complete_link)
+        yt_dler(complete_link)
+        i+=1
+    print('Rename files to avoid ugly underscores')
+    names('Downloaded_mp3')
 
 if __name__ == "__main__":
     main()
