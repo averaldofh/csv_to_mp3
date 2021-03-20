@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.1">
+  <object class="tk.Toplevel" id="mainApp">
+    <property name="geometry">480x320</property>
+    <property name="height">200</property>
+    <property name="iconbitmap">ico.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">CSV Youtube Downloader</property>
+    <property name="width">200</property>
+    <child>
+      <object class="ttk.Frame" id="fr_main">
+        <property name="height">240</property>
+        <property name="width">450</property>
+        <layout manager="pack">
+          <property name="anchor">n</property>
+          <property name="propagate">False</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label1">
+            <property name="font">{Calibri} 20 {bold}</property>
+            <property name="text" translatable="yes">CSV Youtube Downloader</property>
+            <layout manager="pack">
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="lf_input">
+            <property name="height">100</property>
+            <property name="text" translatable="yes">Input file (csv)</property>
+            <property name="width">450</property>
+            <layout manager="pack">
+              <property name="propagate">False</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="lbl_input">
+                <property name="text" translatable="yes">Choose the csv file:</property>
+                <layout manager="pack">
+                  <property name="anchor">w</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Entry" id="ent_input">
+                <property name="state">readonly</property>
+                <layout manager="pack">
+                  <property name="anchor">n</property>
+                  <property name="expand">true</property>
+                  <property name="fill">x</property>
+                  <property name="ipady">2</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btn_file">
+                <property name="command" type="command" cbtype="simple">cmd_inputfile</property>
+                <property name="text" translatable="yes">Open...</property>
+                <layout manager="pack">
+                  <property name="anchor">n</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="lf_output">
+            <property name="height">100</property>
+            <property name="text" translatable="yes">Output Folder</property>
+            <property name="width">450</property>
+            <layout manager="pack">
+              <property name="propagate">False</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="lbl_output">
+                <property name="text" translatable="yes">Select a folder where to download the songs:</property>
+                <layout manager="pack">
+                  <property name="anchor">w</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Entry" id="ent_folder">
+                <property name="state">readonly</property>
+                <layout manager="pack">
+                  <property name="anchor">n</property>
+                  <property name="expand">true</property>
+                  <property name="fill">x</property>
+                  <property name="ipady">2</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btn_outsel">
+                <property name="command" type="command" cbtype="simple">cmd_outputpath</property>
+                <property name="text" translatable="yes">Choose Folder...</property>
+                <layout manager="pack">
+                  <property name="anchor">n</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="fr_actions">
+        <property name="height">80</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="propagate">True</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Frame" id="fr_btns">
+            <property name="height">25</property>
+            <property name="width">450</property>
+            <layout manager="pack">
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Button" id="btn_dl">
+                <property name="command" type="command" cbtype="simple">cmd_dl</property>
+                <property name="default">disabled</property>
+                <property name="state">disabled</property>
+                <property name="text" translatable="yes">Download list</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btn_out">
+                <property name="command" type="command" cbtype="simple">cmd_open</property>
+                <property name="default">disabled</property>
+                <property name="state">disabled</property>
+                <property name="text" translatable="yes">Open Output</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="fr_pb">
+            <property name="height">20</property>
+            <property name="width">350</property>
+            <layout manager="pack">
+              <property name="pady">2</property>
+              <property name="propagate">False</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Progressbar" id="pb_progress">
+                <property name="orient">horizontal</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="fr_footer">
+            <property name="height">30</property>
+            <property name="width">480</property>
+            <layout manager="pack">
+              <property name="propagate">False</property>
+              <property name="side">bottom</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="lbl_ver">
+                <property name="text" translatable="yes">V1.0 -</property>
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="propagate">False</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lbl_git">
+                <property name="cursor">hand2</property>
+                <property name="foreground">#0000ff</property>
+                <property name="text" translatable="yes">github.com</property>
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btn_quit">
+                <property name="command" type="command" cbtype="simple">cmd_exit</property>
+                <property name="text" translatable="yes">Quit</property>
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="propagate">True</property>
+                  <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
