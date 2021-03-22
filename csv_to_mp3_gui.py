@@ -27,7 +27,7 @@ from tkinter.filedialog import askdirectory
 import webbrowser
 import sys
 import eyed3
- 
+
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
@@ -48,7 +48,7 @@ def get_href(url):
     return tag
 
 def yt_dler(vid_link, art, trk):
-    outpath = str(app.ent_folder.get() + '/' + art + ' - ' + trk + '.%(ext)s')
+    outpath = str(app.ent_folder.get() + '/' + art.replace('/','-') + ' - ' + trk.replace('/','-') + '.%(ext)s')
     ydl_opts = {
         'outtmpl': outpath,
         'format': 'bestaudio/best',
@@ -66,7 +66,7 @@ def yt_dler(vid_link, art, trk):
     ydl.download([vid_link])
 
 def tag_this(art, trk, alb, trknum):
-    audiofile = eyed3.load(str(app.ent_folder.get() + '/' + art + ' - ' + trk + '.mp3'))
+    audiofile = eyed3.load(str(app.ent_folder.get() + '/' + art.replace('/','-') + ' - ' + trk.replace('/','-') + '.mp3'))
     audiofile.tag.artist = art
     audiofile.tag.title = trk
     audiofile.tag.album = alb
