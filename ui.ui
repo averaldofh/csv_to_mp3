@@ -1,19 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface version="1.1">
   <object class="tk.Toplevel" id="mainApp">
-    <property name="geometry">480x320</property>
-    <property name="height">200</property>
     <property name="iconbitmap">ico.ico</property>
     <property name="resizable">none</property>
     <property name="title" translatable="yes">CSV Youtube Downloader</property>
-    <property name="width">200</property>
     <child>
       <object class="ttk.Frame" id="fr_main">
         <property name="height">240</property>
         <property name="width">450</property>
         <layout manager="pack">
           <property name="anchor">n</property>
-          <property name="propagate">False</property>
+          <property name="propagate">True</property>
           <property name="side">top</property>
         </layout>
         <child>
@@ -21,6 +18,30 @@
             <property name="font">{Calibri} 20 {bold}</property>
             <property name="text" translatable="yes">CSV Youtube Downloader</property>
             <layout manager="pack">
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="lbl_instruc">
+            <property name="font">{Calibri} 10 {}</property>
+            <property name="text" translatable="yes">Instructions:</property>
+            <layout manager="pack">
+              <property name="anchor">w</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="lbl_steps">
+            <property name="text" translatable="yes">1. Install FFMPEG!!!
+2. Export playlist on Exportify
+3. Open exported file
+4. Choose where to save the songs</property>
+            <layout manager="pack">
+              <property name="anchor">nw</property>
               <property name="propagate">True</property>
               <property name="side">top</property>
             </layout>
@@ -141,18 +162,6 @@
               <property name="side">top</property>
             </layout>
             <child>
-              <object class="ttk.Button" id="btn_dl">
-                <property name="command" type="command" cbtype="simple">cmd_dl</property>
-                <property name="default">disabled</property>
-                <property name="state">disabled</property>
-                <property name="text" translatable="yes">Download list</property>
-                <layout manager="pack">
-                  <property name="propagate">True</property>
-                  <property name="side">left</property>
-                </layout>
-              </object>
-            </child>
-            <child>
               <object class="ttk.Button" id="btn_out">
                 <property name="command" type="command" cbtype="simple">cmd_open</property>
                 <property name="default">disabled</property>
@@ -161,6 +170,33 @@
                 <layout manager="pack">
                   <property name="propagate">True</property>
                   <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btn_dl">
+                <property name="command" type="command" cbtype="simple">cmd_dl</property>
+                <property name="default">disabled</property>
+                <property name="state">disabled</property>
+                <property name="text" translatable="yes">Download list</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">right</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Checkbutton" id="chkbtn_id3">
+                <property name="command" type="command" cbtype="simple">cmd_id3</property>
+                <property name="offvalue">0</property>
+                <property name="onvalue">1</property>
+                <property name="state">disabled</property>
+                <property name="text" translatable="yes">Experimental: ID3 Tags</property>
+                <property name="variable">boolean:idopt</property>
+                <layout manager="pack">
+                  <property name="anchor">e</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
                 </layout>
               </object>
             </child>
@@ -179,9 +215,21 @@
               <object class="ttk.Progressbar" id="pb_progress">
                 <property name="orient">horizontal</property>
                 <layout manager="pack">
+                  <property name="expand">true</property>
                   <property name="fill">x</property>
-                  <property name="propagate">True</property>
-                  <property name="side">top</property>
+                  <property name="propagate">False</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lbl_progress">
+                <property name="font">{calibri} 10 {}</property>
+                <property name="justify">right</property>
+                <property name="text" translatable="yes">0/0</property>
+                <layout manager="pack">
+                  <property name="propagate">False</property>
+                  <property name="side">right</property>
                 </layout>
               </object>
             </child>
@@ -197,7 +245,7 @@
             </layout>
             <child>
               <object class="ttk.Label" id="lbl_ver">
-                <property name="text" translatable="yes">V1.0 -</property>
+                <property name="text" translatable="yes">V0.4 -</property>
                 <layout manager="pack">
                   <property name="anchor">s</property>
                   <property name="propagate">False</property>
@@ -208,8 +256,39 @@
             <child>
               <object class="ttk.Label" id="lbl_git">
                 <property name="cursor">hand2</property>
+                <property name="font">{calibri} 10 {underline}</property>
                 <property name="foreground">#0000ff</property>
                 <property name="text" translatable="yes">github.com</property>
+                <bind sequence="&lt;1&gt;" handler="lambda e: callback(&quot;http://www.github.com/averaldofh/csv_to_mp3&quot;)" add="" />
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lbl_exportify">
+                <property name="cursor">hand2</property>
+                <property name="font">{calibri} 10 {underline}</property>
+                <property name="foreground">#0000ff</property>
+                <property name="text" translatable="yes">Exportify</property>
+                <bind sequence="&lt;1&gt;" handler="lambda e: callback(&quot;https://watsonbox.github.io/exportify/&quot;)" add="" />
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="padx">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lbl_ffmpeg">
+                <property name="cursor">hand2</property>
+                <property name="font">{calibri} 10 {underline}</property>
+                <property name="foreground">#0000ff</property>
+                <property name="text" translatable="yes">FFMPEG</property>
+                <bind sequence="&lt;1&gt;" handler="lambda e: callback(&quot;https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg&quot;)" add="" />
                 <layout manager="pack">
                   <property name="anchor">s</property>
                   <property name="propagate">True</property>
