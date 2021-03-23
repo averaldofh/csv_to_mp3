@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "D:/Python/csv2mp3/csv_to_mp3_gui.py"
+   "value": "D:/Python/csv_to_mp3/csv_to_mp3_gui.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "D:/Python/csv2mp3/ico.ico"
+   "value": "D:/Python/csv_to_mp3/ico.ico"
   },
   {
    "optionDest": "ascii",
@@ -63,7 +63,7 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/Python/csv2mp3/ico.ico;."
+   "value": "D:/Python/csv_to_mp3/ico.ico;."
   }
  ],
  "nonPyinstallerOptions": {
