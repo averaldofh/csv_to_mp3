@@ -26,7 +26,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import askdirectory
 import webbrowser
 import sys
-import eyed3
+import eyed3, re
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -48,7 +48,7 @@ def get_href(url):
     return tag
 
 def yt_dler(vid_link, art, trk):
-    outpath = str(app.ent_folder.get() + '/' + art.replace('/','-') + ' - ' + trk.replace('/','-') + '.%(ext)s')
+    outpath = str(app.ent_folder.get() + '/' + re.sub("[\/:;?]","-",art) + ' - ' + re.sub("[\/:;?]","-",trk) + '.%(ext)s')
     ydl_opts = {
         'outtmpl': outpath,
         'format': 'bestaudio/best',
@@ -66,7 +66,7 @@ def yt_dler(vid_link, art, trk):
     ydl.download([vid_link])
 
 def tag_this(art, trk, alb, trknum):
-    audiofile = eyed3.load(str(app.ent_folder.get() + '/' + art.replace('/','-') + ' - ' + trk.replace('/','-') + '.mp3'))
+    audiofile = eyed3.load(str(app.ent_folder.get() + '/' + re.sub("[\/;:?]","-",art) + ' - ' + re.sub("[\/:;?]","-",trk) + '.mp3'))
     audiofile.tag.artist = art
     audiofile.tag.title = trk
     audiofile.tag.album = alb
@@ -81,27 +81,36 @@ def processlist(songlist):
     yt_link = 'http://www.youtube.com'
     m = len(songs["Track Name"])
     i=0
+    UiApp.upd_progress(app)
     while i<len(songs["Track Name"]):
+        p=i
         trk = str(songs["Track Name"][i]).title()
+        trk = trk[:trk.find('-')]
+        # trk = re.sub("[\/?:;|]",' ', trk)
         art = str(songs["Artist Name"][i]).title()
+        # art = re.sub("[\/?:;|]",' ', art)
         if 'Album Name' in songs:
             alb = str(songs["Album Name"][i]).title()
         else:
             alb = ''
-        if 'Track Number' in songs:
-            trknum = str(songs["Track Number"][i])
+        if songs["Track Number"][i] != "":
+            trknum = int(songs["Track Number"][i])
         else:
             trknum = 0
-        this_song = songs["Track Name"][i]+" "+ songs["Artist Name"][i]
-        this_search = "+".join(this_song.strip().split())
-        div = get_href(search_url+this_search)
-        complete_link = yt_link+div
-        yt_dler(complete_link, art, trk)
-        if id3 == '1':
-            tag_this(art, trk, alb, trknum)
-        i+=1
-        p=i
+        if (f'{art} - {trk}.mp3') not in os.listdir(app.ent_folder.get()):
+            i+=1
+            this_song = re.sub("[\/?:;|]",' ', art) + ' ' + re.sub("[\/?:;|]",' ', trk)
+            this_search = "+".join(this_song.strip().split())
+            div = get_href(search_url+re.sub("[!@#$%¨&*():;|\/?]",' ',this_search))
+            complete_link = yt_link+div
+            yt_dler(complete_link, art, trk)
+            if id3 == '1':
+                tag_this(art, trk, alb, trknum)
+        else:
+            i+=1
         UiApp.upd_progress(app)
+    p=m
+    UiApp.upd_progress(app)    
     if app.ent_folder.get() != '':
         UiApp.out_en(app)
     else:
@@ -109,7 +118,7 @@ def processlist(songlist):
 
 class UiApp:
     def __init__(self, master=None):
-        version = "v0.4"
+        version = "v0.5"
         # build ui
         self.mainApp = tk.Tk() if master is None else tk.Toplevel(master)
         self.fr_main = ttk.Frame(self.mainApp)
@@ -211,7 +220,7 @@ class UiApp:
         self.fr_footer.pack_propagate(0)
         self.fr_actions.configure(height='80', width='200')
         self.fr_actions.pack(side='top')
-        self.mainApp.iconbitmap('ico.ico')
+        self.mainApp.iconbitmap(resource_path('ico.ico'))
         self.mainApp.resizable(False, False)
         self.mainApp.title('CSV Youtube Downloader - ' + version)
 
