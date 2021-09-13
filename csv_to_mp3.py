@@ -90,8 +90,9 @@ def main():
             this_search = "+".join(this_song.strip().split())
             div = get_href(search_url+re.sub("[!@#$%¨&*():;|\/?]",' ',this_search))
             complete_link = yt_link+div
+            print(complete_link)
             yt_dler(complete_link, art, trk)
-            tag_this(art, trk, alb, trknum)
+            #tag_this(art, trk, alb, trknum)
         else:
             print(f"Song '{art} - {trk}.mp3' already Downloaded, skipping")
             i+=1

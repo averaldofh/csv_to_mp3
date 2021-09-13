@@ -48,7 +48,7 @@ def get_href(url):
     return tag
 
 def yt_dler(vid_link, art, trk):
-    outpath = str(app.ent_folder.get() + '/' + re.sub("[\/:;?]","-",art) + ' - ' + trk + '.%(ext)s')
+    outpath = str(app.ent_folder.get() + '/' + re.sub(r"[\/:;?]","-",art) + ' - ' + re.sub(r"[\/:;?]","-",trk) + '.%(ext)s')
     ydl_opts = {
         'outtmpl': outpath,
         'format': 'bestaudio/best',
@@ -86,8 +86,8 @@ def processlist(songlist):
         p=i+1
         UiApp.upd_progress(app)
         trk = str(songs["Track Name"][i]).title()
-        if trk.find('- '):
-            trk = trk[:trk.find('- ')]
+        #if trk.find('- '):
+        #    trk = trk[:trk.find('- ')]
         # trk = re.sub("[\/?:;|]",' ', trk)
         art = str(songs["Artist Name(s)"][i]).title()
         # art = re.sub("[\/?:;|]",' ', art)
