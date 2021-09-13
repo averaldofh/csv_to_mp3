@@ -75,15 +75,14 @@ def main():
     while i<len(songs["Track Name"]):
         print(f'Song {i+1}/{m}...')
         trk = str(songs["Track Name"][i]).title()
-        art = str(songs["Artist Name"][i]).title()
+        art = str(songs["Artist Name(s)"][i]).title()
         if 'Album Name' in songs:
             alb = str(songs["Album Name"][i]).title()
         else:
             alb = ''
-        if songs["Track Number"][i] != "":
-            trknum = int(songs["Track Number"][i])
-        else:
-            trknum = 0
+        
+        trknum = m
+        
         if (f'{art} - {trk}.mp3') not in os.listdir('Downloaded_mp3/'):
             i+=1
             print(f'Downloading song: {art} - {trk}...')

@@ -48,7 +48,7 @@ def get_href(url):
     return tag
 
 def yt_dler(vid_link, art, trk):
-    outpath = str(app.ent_folder.get() + '/' + re.sub("[\/:;?]","-",art) + ' - ' + re.sub("[\/:;?]","-",trk) + '.%(ext)s')
+    outpath = str(app.ent_folder.get() + '/' + re.sub("[\/:;?]","-",art) + ' - ' + trk + '.%(ext)s')
     ydl_opts = {
         'outtmpl': outpath,
         'format': 'bestaudio/best',
@@ -83,20 +83,19 @@ def processlist(songlist):
     i=0
     UiApp.upd_progress(app)
     while i<len(songs["Track Name"]):
-        p=i
+        p=i+1
+        UiApp.upd_progress(app)
         trk = str(songs["Track Name"][i]).title()
-        trk = trk[:trk.find('-')]
+        if trk.find('- '):
+            trk = trk[:trk.find('- ')]
         # trk = re.sub("[\/?:;|]",' ', trk)
-        art = str(songs["Artist Name"][i]).title()
+        art = str(songs["Artist Name(s)"][i]).title()
         # art = re.sub("[\/?:;|]",' ', art)
         if 'Album Name' in songs:
             alb = str(songs["Album Name"][i]).title()
         else:
             alb = ''
-        if songs["Track Number"][i] != "":
-            trknum = int(songs["Track Number"][i])
-        else:
-            trknum = 0
+        trknum = m
         if (f'{art} - {trk}.mp3') not in os.listdir(app.ent_folder.get()):
             i+=1
             this_song = re.sub("[\/?:;|]",' ', art) + ' ' + re.sub("[\/?:;|]",' ', trk)
@@ -118,7 +117,7 @@ def processlist(songlist):
 
 class UiApp:
     def __init__(self, master=None):
-        version = "v0.5"
+        version = "v0.6"
         # build ui
         self.mainApp = tk.Tk() if master is None else tk.Toplevel(master)
         self.fr_main = ttk.Frame(self.mainApp)
